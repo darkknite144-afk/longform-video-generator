@@ -1,4 +1,6 @@
--r requirements.txt
-
 # --- Testing ---
+# Only packages needed at import-time by test files.
+# Runtime deps (faster-whisper, kurigram, tgcrypto) use lazy imports
+# inside functions, so tests don't need them installed.
 pytest>=8.0
+requests>=2.31
