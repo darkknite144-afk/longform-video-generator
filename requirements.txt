@@ -1,0 +1,15 @@
+# --- Transcription (offline, CPU) ---
+faster-whisper==1.2.1
+
+# --- HTTP (Sarvam AI calls + stock video downloads) ---
+requests==2.32.3
+
+# --- Telegram MTProto delivery ---
+# IMPORTANT: the original `pyrogram` package on PyPI is unmaintained
+# ("no longer maintained or supported" per its own docs), and PyPI has seen
+# a real supply-chain campaign (Operation Navy Ghost, late 2025-2026)
+# distributing backdoored fake "pyrogram fork" packages to bot developers.
+# `kurigram` is the actively maintained, drop-in-compatible fork
+# (still `from pyrogram import Client`) -- use it instead of raw `pyrogram`.
+kurigram==2.2.23
+tgcrypto==1.2.5
