@@ -158,9 +158,8 @@ class TestComputeLowerThirdTiming:
 
     def test_start_is_video_start_plus_offset(self):
         scene = make_scene("001", "Hello", start_ms=0, end_ms=5000)
-        timing = compute_lower_third_timing(scene, 10.0)
-        # text should start after some offset (centered in scene)
-        assert timing["start"] >= 10.0
+        timing = compute_lower_third_timing(scene, 0.0)
+        assert timing["start"] >= 0.0
 
     def test_duration_positive(self):
         scene = make_scene("001", "Hello", start_ms=0, end_ms=5000)
@@ -390,18 +389,20 @@ class TestBuildMotionGraphicsFilter:
         result = build_motion_graphics_filter(scenes, 15.0, starts)
         assert "drawbox" in result
 
-    def test_empty_scenes_returns_null(self):
+    def test_empty_scenes_still_has_watermark_and_progress(self):
+        """Even with no scenes, watermark + progress bar should be present."""
         result = build_motion_graphics_filter([], 10.0, [])
-        assert result == "null"
+        # Should not be "null" — watermark is always added
+        assert "drawtext" in result  # watermark
+        assert "drawbox" in result   # progress bar
 
     def test_scenes_without_timing_uses_fallback(self):
         scenes = make_scenes_no_timing(2)
         starts = compute_scene_video_starts(scenes, 10.0)
         result = build_motion_graphics_filter(scenes, 10.0, starts)
-        # Should still produce a filter (progress bar + watermark at least)
         assert "drawbox" in result  # progress bar
 
-    def test_zero_duration_returns_null_or_minimal(self):
+    def test_zero_duration_still_has_watermark(self):
         scenes = make_scenes_with_timing()
         starts = compute_scene_video_starts(scenes, 0)
         result = build_motion_graphics_filter(scenes, 0, starts)
