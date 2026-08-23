@@ -85,7 +85,7 @@ def truncate_text(text: str, max_length: int = MAX_TEXT_LENGTH) -> str:
 
 
 def escape_drawtext(text: str) -> str:
-    """Escape special characters for FFmpeg drawtext filter.
+    r"""Escape special characters for FFmpeg drawtext filter.
 
     FFmpeg drawtext requires escaping: : ' \ % and newlines.
     """
