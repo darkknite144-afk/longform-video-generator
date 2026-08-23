@@ -4,7 +4,8 @@ Automated YouTube Long-Form Video Generator
 
 Pipeline: parse script → whisper transcription → deterministic scene/
 timestamp alignment → per-scene FFmpeg processing (varied Ken Burns
-motion) → zero-RAM concat mux → Telegram delivery via MTProto.
+motion) → zero-RAM concat mux → motion graphics overlay → Telegram
+delivery via MTProto.
 
 Optional Sarvam AI-based sync (--sync-method sarvam) replaces the
 original Gemini-based approach.
@@ -19,7 +20,7 @@ from .config import (
 )
 from .models import Scene
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __all__ = [
     "Scene",
     "EFFECTS",
